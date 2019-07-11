@@ -1,0 +1,68 @@
+<div *ngIf="!haveTicket" class="readDiv" (click)="focusCard()">
+  <div class="title-page"  fxLayout="row" fxLayoutAlign="space-evenly center">
+    <img *ngIf="!searchTicket" class="wave-rfid" src="assets/img/onda.png">
+    <div *ngIf="searchTicket" class="no-ticket">
+      X
+    </div>
+    <div *ngIf="!searchTicket" fxLayout="column" fxLayoutAlign="center center">
+      <span class="title-one">Aproxime o cartão ao Leitor</span>
+      <span class="subtitle-one">Para identificação do Ingresso e seu Usuário</span>
+    </div>
+    <div *ngIf="searchTicket" fxLayout="column" fxLayoutAlign="center center">
+      <span class="title-one">Ingresso não encontrado</span>
+      <span class="subtitle-one">Usuário não possuí ingresso para o evento</span>
+    </div>
+  </div>
+  <div class="content-page" fxLayout="row" fxLayoutAlign="center center">
+    <div class="button-return"  fxLayout="row" fxLayoutAlign="center center">Retornar</div>
+  </div>
+</div>
+<div *ngIf="haveTicket" class="readDiv" (click)="focusCard()">
+  <div class="title-page"  fxLayout="row" fxLayoutAlign="space-evenly center">
+    <img class="wave-rfid picture" src="assets/img/{{dataCard.picture}}">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <span class="title-one">{{dataCard.name}}</span>
+    </div>
+
+  </div>
+  <div class="content-page" fxLayout="column" fxLayoutAlign="center center">
+    <div  style="width: 250px" >
+    <div class="pad-20" fxLayout="row" fxLayoutAlign="space-between start">
+      <!--<span class="title-one">{{dataCard.contact}}</span>-->
+      <div fxLayout="column">
+        <span class="place">CPF</span>
+        <span class="content">498987</span>
+      </div>
+      <div fxLayout="column">
+        <span class="place">RG</span>
+        <span class="content">123456</span>
+      </div>
+    </div>
+    <div class="pad-20" fxLayout="row" fxLayoutAlign="space-between start">
+      <!--<span class="title-one">{{dataCard.contact}}</span>-->
+      <div fxLayout="column">
+        <span class="place">Email</span>
+        <span class="content"></span>
+      </div>
+    </div>
+    <div class="pad-20" fxLayout="row" fxLayoutAlign="space-between start">
+      <!--<span class="title-one">{{dataCard.contact}}</span>-->
+      <div fxLayout="column">
+        <span class="place">Celular</span>
+        <span class="content"></span>
+      </div>
+    </div>
+    <div class="pad-20" fxLayout="row" fxLayoutAlign="space-between start">
+      <!--<span class="title-one">{{dataCard.contact}}</span>-->
+      <div fxLayout="column">
+        <span class="place">Idade</span>
+        <span class="content"> anos</span>
+      </div>
+    </div>
+    <div class="button-confirm"  fxLayout="row" fxLayoutAlign="center center">Confirmar Entrada</div>
+    </div>
+  </div>
+</div>
+
+    <input type="text" #cardRFID (keyup)="readCard()">
+

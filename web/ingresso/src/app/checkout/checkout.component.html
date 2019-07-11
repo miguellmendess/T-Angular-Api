@@ -1,0 +1,64 @@
+<div *ngIf="!haveTicket" class="readDiv" (click)="focusCard()">
+  <div class="title-page"  fxLayout="row" fxLayoutAlign="space-evenly center">
+    <img *ngIf="!searchTicket" class="wave-rfid" src="assets/img/checkout.png">
+    <div *ngIf="searchTicket" class="no-ticket">
+      X
+    </div>
+    <div *ngIf="!searchTicket" fxLayout="column" fxLayoutAlign="center center">
+      <span class="title-one">Aproxime o cartão ao Leitor</span>
+      <span class="subtitle-one">Para identificação do Usuário e sua saída do evento</span>
+    </div>
+    <div *ngIf="searchTicket" fxLayout="column" fxLayoutAlign="center center">
+      <span class="title-one">Ingresso não encontrado</span>
+      <span class="subtitle-one">Usuário não possuí ingresso para o evento</span>
+    </div>
+  </div>
+  <div class="content-page" fxLayout="row" fxLayoutAlign="center center">
+    <div class="button-return"  fxLayout="row" fxLayoutAlign="center center">Retornar</div>
+  </div>
+</div>
+<div *ngIf="haveTicket" class="readDiv" (click)="focusCard()">
+  <div class="title-page"  fxLayout="row" fxLayoutAlign="space-evenly center">
+    <img class="wave-rfid picture" src="assets/img/{{dataCard.picture}}">
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <span class="title-one">{{dataCard.name}}</span>
+      <span class="title-one">Valor Total a Pagar <br> R$ {{dataCard.totally}}</span>
+    </div>
+
+  </div>
+  <div class="content-page" fxLayout="column" fxLayoutAlign="center center">
+    <div  style="width: 500px">
+      <div class="pad-20" fxLayout="row" fxLayoutAlign="space-between start">
+        <!--<span class="title-one">{{dataCard.contact}}</span>-->
+        <div fxLayout="column" fxFlex="100">
+          <span class="place">Resumo de Consumo</span>
+
+          <span class="content"></span>
+
+          <div *ngFor="let product of dataCard.products" fxLayout="row" fxLayoutAlign="space-between center" >
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <img class="pic-product" src="assets/img/produto.PNG">
+              <div class="qtdProd">{{product.qtdProduct}} X</div>
+            </div>
+            <div fxLayout="column">
+              <span class="title-product">{{product.productName}}</span>
+              <span class="subtitle-product">({{product.product_type}})</span>
+            </div>
+            <div fxLayout="column">
+              <span class="title-product">Valor Unidade</span>
+              <span class="subtitle-product">R${{(product.productValueUnity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</span>
+            </div>
+            <div fxLayout="column">
+              <span class="title-product">Valor Total</span>
+              <span class="subtitle-product">{{calcValueTotal(product.productValueUnity, product.qtdProduct)}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="button-confirm"  fxLayout="row" fxLayoutAlign="center center">Confirmar Entrada</div>
+    </div>
+  </div>
+</div>
+
+<input type="text" #cardRFID (keyup)="readCard()">
+
